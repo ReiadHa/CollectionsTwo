@@ -1,10 +1,20 @@
-import random
+from random import randint
 
-choice = [random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') for i in range(3)]
-choice1 = [random.choice('1234567890') for i in range(7)]
-choice2 = [random.choice('!@#$%^&*()') for i in range(3)]
-choice3 = [random.choice('abcdefghijklmnopqrstuvwxyz') for i in range(8)]
-choice4 = [random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for i in range(3)]
-choices = choice1+choice2+choice3
-random.shuffle(choices)
-print(''.join(choice+choice1+choice2+choice3+choice4))
+
+import random
+def wachtwoord():
+    numbers = list('1234567890')
+    lowerC = list('abcdefghijklmnopqrstuvwxyz')
+    upperC = list('ABDCEFGHIJKLMNOPQRSTUVWXYZ')
+    symbols = list('@#$%&_')
+    password = []
+    for i in range(7):
+        password.append(random.choice(numbers))
+    for i in range(8):
+        password.append(random.choice(lowerC))
+    for i in range(3):
+        password.append(random.choice(symbols))
+    for i in range(6):
+        password.append(random.randint(upperC))
+    print(password)
+wachtwoord()
