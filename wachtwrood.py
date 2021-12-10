@@ -1,11 +1,20 @@
 
 import random
 
-choice = [random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') for i in range(3)]
-choice1 = [random.choice('1234567890') for i in range(7)]
-choice2 = [random.choice('!@#$%^&*()') for i in range(3)]
-choice3 = [random.choice('abcdefghijklmnopqrstuvwxyz') for i in range(8)]
-choice4 = [random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890') for i in range(3)]
-choices = choice1+choice2+choice3
-random.shuffle(choices)
-print('hier is uw wachtwoord met 24 characters:',''.join(choice+choices+choice4))
+choiceLC = [random.choice('abcdefghijklmnopqrstuvwxyz') for i in range(2)]
+choiceUP = [random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ') for i in range(random.randint(1,3))]
+choiceNUM = [random.choice('1234567890')for i in range(random.randint(4,7))]
+choiceSYM = [random.choice('!@#$%^&*()')for i in range(random.randint(3, 3))]
+
+choice_LW_UP = choiceLC+choiceUP
+random.shuffle(choice_LW_UP)
+choiceALL = choiceLC+choiceUP+choiceNUM+choiceSYM
+random.shuffle(choiceALL)
+choiceTotall = choice_LW_UP+choiceALL
+choiceSUM = 24-len(choiceTotall)
+choiceADD = [random.choice('abcdefghijklmnopqrstuvwxyz') for i in range(choiceSUM)]
+if len(choiceTotall) < 24:
+    print(''.join(choiceTotall+choiceADD))
+    print('aantal characters:', len(choiceTotall+choiceADD))
+else:
+    print(choiceTotall)
