@@ -1,32 +1,46 @@
 import random
-def wachtwoord():
-    length = 24
-    numbers = list('1234567890')
-    lowerC = list('abcdefghijklmnopqrstuvwxyz')
-    upperC = list('ABDCEFGHIJKLMNOPQRSTUVWXYZ')
-    symbols = list('@#$%&_')
-    num = []
-    up = []
-    low = []
-    sym = []                                 
-    password = []
-    for i in range(random.randint(4,7)):
-        num.append(random.choice(numbers))
-    for i in range(8):
-        low.append(random.choice(lowerC))
-    for i in range(3):
-        sym.append(random.choice(symbols))
-    for i in range(random.randint(2,6)):
-        up.append(random.choice(upperC))
-    password = num + up +low +sym
-    amount = 24-len(password)
-    if len(password)< length:
-        choice3 = [random.choice('abcdefghijklmnopqrstuvwxyz') for i in range(amount)]
-        password = num + up +low +sym+choice3
-    elif  password [0:2] == num and password[0:2] ==sym  and password[0:-1] == sym :
-        wachtwoord()
-    random.shuffle(password)
-    print(''.join(password))
 
-    
-wachtwoord()
+scoreList = []
+
+score = 0
+
+def dices():
+    global dice,gameOver
+    gameOver = False
+    if len(scoreList) == 6: 
+            gameOver == True
+    while gameOver == False:
+        dice = []
+        for x in range(5):
+            dice.append(random.randint(1,6))
+        print('jou dobbelestenen nummers zijn: ',end='')
+        for i in dice:
+            print(str(i), '',end='')
+        reroll = input(', welke dobellestenen wile je rerollen? ')
+        reroll = reroll.split()
+        for index, x in enumerate(reroll):
+            reroll[index] = int(x)-1
+        for index in reroll:
+            dice[index] = random.randint(1,6)
+        print('jou dobbelstenen set: ', end='')
+        for i in dice:
+            print(str(i), '',end='')
+        print('')
+        scores()
+def scores():
+    global dice,score
+    numberValid = False
+    while not numberValid:
+        numScore = int(input('welke nummer wil je scoren? '))
+        if numScore not in scoreList:
+            numberValid = True
+        else:
+            print('dit nummer had je al gescored!')
+            print('de nummer die je al had gescored zij: ',str(scoreList))
+        for d in dice:
+            if d == numScore:
+                score += d
+        scoreList.append(numScore)
+        print('de gescoorde nummers zij: ',str(scoreList))
+        print('je score is: ',score)
+dices()
