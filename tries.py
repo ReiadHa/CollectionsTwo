@@ -8,7 +8,7 @@ def wachtwoord():
     num = []
     up = []
     low = []
-    sym = []
+    sym = []                                 
     password = []
     for i in range(random.randint(4,7)):
         num.append(random.choice(numbers))
