@@ -9,18 +9,30 @@ score =0
 gameOver = False
 def counting(numScore):
     global score
+    setDice = set(dice)
+    fullhouse = len(setDice)
     if dice.count(numScore) == 3 or dice.count(numScore) == 4:
         score = score + sum(dice)
+    elif fullhouse == 2:
+        if dice.count(dice[0]) == 2 or dice.count(dice[0]) == 3:
+            print('gefeliciteerd je had een Fullhouse gewonnen!')
+            score = score + 25
+        else:
+            pass
     elif 1 in dice and 2 in dice and 3 in dice and 4 in dice:
-        print('gefeliciteerd je hebt een straight gewonnen, dat betekent +30 points? ')
+        print('gefeliciteerd je hebt een klein straight gewonnen, dat betekent +30 points? ')
         score = score + 30
     elif 2 in dice and 3 in dice and 4 in dice and 5 in dice :
-        print('gefeliciteerd je hebt een straight gewonnen, dat betekent +30 points? ')
+        print('gefeliciteerd je hebt een klein straight gewonnen, dat betekent +30 points? ')
         score = score + 30
     elif 3 in dice and 4 in dice and 5 in dice and 6 in dice:
         print('gefeliciteerd je hebt een straight gewonnen, dat betekent +30 points? ')
         score = score + 30
     elif 1 in dice and 2 in dice and 3 in dice and 4 in dice and 5 in dice:
+        print('gefeliciteerd je hebt een groot straight gewonnen, dat betekent +30 points? ')
+        score = score + 40
+    elif 2 in dice and 3 in dice and 4 in dice and 5 in dice and 6 in dice:
+        print('gefeliciteerd je hebt een groot straight gewonnen, dat betekent +30 points? ')
         score = score + 40
     elif dice.count(numScore) == 5 :
         print('Yhatzee')
@@ -55,17 +67,15 @@ def somehing():
             dice.append(random.randint(1,6))
         dieRolls()
         print('')
-        if chance == False:
-            kansen()
         reroll = input('welke dobblesteen wile je rerollen? ')
         reroll = reroll.split()
         for index, x in enumerate(reroll):
             reroll[index] = int(x)-1
         for index in reroll:
             dice[index]  = random.randint(1,6)
+        dieRolls()
         if chance == False:
             kansen()
-        dieRolls()
         scores()
         break
 def scores():
